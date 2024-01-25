@@ -10,7 +10,7 @@ define('LOGIN', "xergan");
 define('MDP', "/Admin1234");
 define('BDD', "xergan_geoguez");
 
-if (isset($_POST['answer'])) {
+if (isset($_POST['guess']) and isset($_SESSION['answer'])) {
     try {
         //On crée un objet $conn qui représente la connexion au SGBD
         $conn = new PDO("mysql:host=" . SERVER . ";dbname=" . BDD, LOGIN, MDP);
@@ -19,11 +19,15 @@ if (isset($_POST['answer'])) {
         // Assuming $user represents the current user
         $user = $_SESSION['userinfo']['username'];
 
-        if ($_POST['answer' == ])
-        // Prepare a query to increase the user's score
-        $update = $conn->prepare("UPDATE members SET score = score + 1 WHERE user = :user");
-        $update->bindParam(':user', $user);
-        $update->execute();
+        if ($_POST['guess' == $_SESSION['answer']]) {
+            // Prepare a query to increase the user's score
+            $update = $conn->prepare("UPDATE members SET score = score + 1 WHERE user = :user");
+            $update->bindParam(':user', $user);
+            $update->execute();
+        }
+
+        header('Location: quiz.php');
+        exit();
 
     } //fin du try
     //On capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci
