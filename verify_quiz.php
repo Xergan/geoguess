@@ -18,12 +18,15 @@ if (isset($_POST['guess']) and isset($_SESSION['answer'])) {
 
         // Assuming $user represents the current user
         $user = $_SESSION['userinfo']['username'];
+        $attempts = $_SESSION['userinfo']['attempts'];
 
-        if ($_POST['guess' == $_SESSION['answer']]) {
+        if ($_POST['guess'] == $_SESSION['answer']) {
             // Prepare a query to increase the user's score
-            $update = $conn->prepare("UPDATE members SET score = score + 1 WHERE user = :user");
-            $update->bindParam(':user', $user);
-            $update->execute();
+            $scoreToAdd = max(50, 1000 / $attempts);
+
+            $updateScore = $conn->prepare("UPDATE members SET score = score + $scoreToAdd WHERE user = :user");
+            $updateScore->bindParam(':user', $user);
+            $updateScore->execute();
         }
 
         header('Location: quiz.php');
