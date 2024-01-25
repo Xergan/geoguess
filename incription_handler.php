@@ -39,7 +39,7 @@ try {
         exit();
     } else {
         // L'utilisateur n'existe pas, on peut continuer l'inscription
-        $insert = $conn->prepare("INSERT INTO members(user, email, password) VALUES(:user, :email, :password)");
+        $insert = $conn->prepare("INSERT INTO members(user, email, password) VALUES(:user, :email, :password, :score)");
         $insert->bindParam(':user', $user);
         $insert->bindParam(':email', $email);
         $insert->bindParam(':password', $password);
