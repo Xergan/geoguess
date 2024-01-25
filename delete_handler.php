@@ -5,10 +5,10 @@ if (!isset($_SESSION['userinfo'])) {
     exit();
 }
 
-define('SERVER', "127.0.0.1");
-define('LOGIN', "root");
-define('MDP', "");
-define('BDD', "site_log_test");
+define('SERVER', "mysql-xergan.alwaysdata.net");
+define('LOGIN', "xergan");
+define('MDP', "/Admin1234");
+define('BDD', "xergan_geoguez");
 
 try {
     //On crée un objet $conn qui représente la connexion au SGBD
