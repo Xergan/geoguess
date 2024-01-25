@@ -16,11 +16,6 @@ try {
     //On crée un rapport d’erreur et on définit le mode d'erreur de PDO sur Exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Supprimer l'avatar
-    if (file_exists("Ressources/Images/" . $_SESSION['userinfo']['user'] . ".png")) {
-        unlink("Ressources/Images/" . $_SESSION['userinfo']['user'] . ".png");
-    }
-
     // Supprimer le compte
     $delete = $conn->prepare("DELETE FROM members WHERE user = :login OR email = :login");
     $delete->bindParam(':login', $_SESSION['userinfo']['user']);
